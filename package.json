@@ -1,0 +1,14 @@
+{
+  "name": "jsl-omega-network",
+  "version": "1.0.0-alpha",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "deploy:worker": "wrangler deploy",
+    "dev:worker": "wrangler dev",
+    "db:init": "wrangler d1 execute jsl_omega_network --remote --file=worker/schema.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
