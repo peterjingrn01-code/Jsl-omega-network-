@@ -1,1 +1,58 @@
-
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>JOFP — JSL Omega Network</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#07111d;color:#eef5ff;font-family:Arial,sans-serif}
+main{max-width:980px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+h1{margin:0;font-size:34px}.muted{color:#9db1c7}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.card{background:#0d1b2b;border:1px solid #273d55;border-radius:16px;padding:14px}
+input,select,button,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid #36516c;background:#071421;color:#fff;font:inherit}
+button{cursor:pointer;font-weight:700}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+label{display:block;margin:9px 0 5px;color:#b7c8da}pre{white-space:pre-wrap;word-break:break-word;background:#050d16;padding:10px;border-radius:10px;min-height:100px}
+.node{padding:9px;border:1px solid #29445f;border-radius:10px;margin:7px 0;cursor:pointer}.online{color:#74e39a}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}h1{font-size:28px}}
+</style>
+</head>
+<body><main>
+<div class="top"><div><h1>JOFP</h1><div class="muted">JSL Omega Field Protocol · Multi-device Alpha</div></div><div id="status" class="online">Not registered</div></div>
+<div class="grid">
+<section class="card">
+<label>Worker API URL</label><input id="api" placeholder="https://jsl-omega-network.YOUR-SUBDOMAIN.workers.dev">
+<label>Network Key</label><input id="key" type="password" placeholder="OMEGA_NETWORK_KEY">
+<label>Device Name</label><input id="name" placeholder="Phone / Desktop / Notebook">
+<label>Device Type</label><select id="type"><option>Android Phone</option><option>Windows Desktop</option><option>Windows Notebook</option><option>Mac</option><option>Linux</option><option>Other</option></select>
+<div class="row"><button id="register">REGISTER NODE</button><button id="refresh">DISCOVER NODES</button></div>
+<pre id="me">No node identity yet.</pre>
+</section>
+<section class="card">
+<label>Discovered Nodes</label><div id="nodes"></div>
+<label>Target Node ID</label><input id="target">
+<label>Message</label><textarea id="message" rows="3">Hello from JOFP</textarea>
+<div class="row"><button id="pair">PAIR</button><button id="send">SEND</button></div>
+<button id="receive" style="margin-top:8px">RECEIVE / REFRESH</button>
+<pre id="messages">No messages.</pre>
+</section>
+</div>
+<section class="card" style="margin-top:14px"><label>Operation Log</label><pre id="log"></pre></section>
+<script>
+const $=id=>document.getElementById(id);
+let node=JSON.parse(localStorage.getItem("omega_node")||"null");
+$("api").value=localStorage.getItem("omega_api")||"";
+$("key").value=localStorage.getItem("omega_key")||"";
+$("name").value=localStorage.getItem("omega_name")||"";
+if(node){$("me").textContent=JSON.stringify(node,null,2);$("status").textContent="Registered: "+node.device_name}
+const headers=()=>({"Content-Type":"application/json","X-Omega-Key":$("key").value});
+const base=()=>$("api").value.trim().replace(/\/$/,"");
+async function call(path,opt={}){if(!base())throw new Error("Enter Worker API URL first");const r=await fetch(base()+path,{...opt,headers:{...headers(),...(opt.headers||{})}});const j=await r.json();if(!r.ok)throw new Error(j.error||String(r.status));return j}
+const log=x=>$("log").textContent=typeof x==="string"?x:JSON.stringify(x,null,2);
+$("register").onclick=async()=>{try{localStorage.setItem("omega_api",$("api").value);localStorage.setItem("omega_key",$("key").value);localStorage.setItem("omega_name",$("name").value);const j=await call("/register",{method:"POST",body:JSON.stringify({node_id:node?.node_id,device_name:$("name").value,device_type:$("type").value})});node=j.node;localStorage.setItem("omega_node",JSON.stringify(node));$("me").textContent=JSON.stringify(node,null,2);$("status").textContent="Online: "+node.device_name;log(j)}catch(e){log("ERROR: "+e.message)}};
+$("refresh").onclick=async()=>{try{const j=await call("/nodes");$("nodes").innerHTML="";j.nodes.forEach(n=>{const d=document.createElement("div");d.className="node";d.innerHTML=`<b>${n.device_name}</b><br><span class="muted">${n.device_type}</span><br><small>${n.node_id}</small>`;d.onclick=()=>{$("target").value=n.node_id};$("nodes").appendChild(d)});log(j)}catch(e){log("ERROR: "+e.message)}};
+$("pair").onclick=async()=>{try{if(!node)throw new Error("Register this device first");log(await call("/pair",{method:"POST",body:JSON.stringify({node_a:node.node_id,node_b:$("target").value})}))}catch(e){log("ERROR: "+e.message)}};
+$("send").onclick=async()=>{try{if(!node)throw new Error("Register this device first");log(await call("/send",{method:"POST",body:JSON.stringify({from_node:node.node_id,to_node:$("target").value,payload:$("message").value})}))}catch(e){log("ERROR: "+e.message)}};
+$("receive").onclick=async()=>{try{if(!node)throw new Error("Register this device first");const j=await call("/receive?node_id="+encodeURIComponent(node.node_id));$("messages").textContent=JSON.stringify(j.messages,null,2);log(j)}catch(e){log("ERROR: "+e.message)}};
+setInterval(async()=>{if(node&&base()){try{await call("/heartbeat",{method:"POST",body:JSON.stringify({node_id:node.node_id})})}catch{}}},30000);
+</script>
+</main></body></html>
