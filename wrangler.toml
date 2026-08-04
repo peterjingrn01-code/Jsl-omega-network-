@@ -7,4 +7,7 @@ binding = "DB"
 database_name = "jsl_omega_network"
 database_id = "7b92b057-19aa-4959-87d2-0aa324ee0250"
 
-# npx wrangler secret put OMEGA_NETWORK_KEY
+[assets]
+directory = "./web"
+binding = "ASSETS"
+run_worker_first = ["/health", "/register", "/heartbeat", "/nodes", "/pair", "/send", "/receive", "/delivered", "/field"]
