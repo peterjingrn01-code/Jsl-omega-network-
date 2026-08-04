@@ -1,1 +1,91 @@
-gello
+# ============================================
+# JSL Omega Network / JOFP
+# Git Ignore
+# ============================================
+
+# Node.js dependencies
+node_modules/
+
+# Wrangler / Cloudflare local state
+.wrangler/
+.dev.vars
+.dev.vars.*
+wrangler.local.toml
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Never commit private keys / certificates
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build / cache
+dist/
+build/
+.cache/
+.tmp/
+temp/
+tmp/
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Package manager cache
+.npm/
+.pnpm-store/
+.yarn/
+
+# Local database files
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Local backup files
+*.bak
+*.backup
+*.old
+
+# Local deployment artifacts
+.wrangler-state/
+.cloudflare/
+
+# ============================================
+# IMPORTANT:
+# Keep these project files tracked by Git
+#
+# core/
+# worker/
+# web/
+# docs/
+# package.json
+# wrangler.toml
+# README.md
+# ============================================
