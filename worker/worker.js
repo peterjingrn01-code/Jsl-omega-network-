@@ -65,7 +65,7 @@ export default {
             omega_id=excluded.omega_id,
             x=excluded.x,y=excluded.y,z=excluded.z,
             status='ONLINE',
-            last_seen=excluded.last_seen
+            last_seen=excluded.last_seen, public_key=excluded.public_key
         `).bind(nodeId,deviceName,deviceType,omegaId,c.x,c.y,c.z,"ONLINE",t,t).run();
 
         return json({ok:true,node:{node_id:nodeId,device_name:deviceName,device_type:deviceType,omega_id:omegaId,...c,status:"ONLINE",last_seen:t}});
