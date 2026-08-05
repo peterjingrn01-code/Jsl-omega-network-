@@ -125,7 +125,7 @@ export default {
         const nodeId = String(url.searchParams.get("node_id") || "");
         const rows = await env.DB.prepare(`
           SELECT message_id,from_node,to_node,omega_id,payload,created_at,delivered_at
-          FROM omega_messages WHERE to_node=?
+          FROM omega_messages WHERE to_node=? AND delivered_at IS NULL
           ORDER BY created_at DESC LIMIT 100
         `).bind(nodeId).all();
         return json({ok:true,messages:rows.results});
