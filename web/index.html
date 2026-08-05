@@ -68,8 +68,31 @@ $("send").onclick = async () => {
   } catch (e) {
     log("ERROR: " + e.message);
   }
-};
-  $("receive").onclick=async()=>{try{if(!node)throw new Error("Register this device first");const j=await call("/receive?node_id="+encodeURIComponent(node.node_id));$("messages").textContent=JSON.stringify(j.messages,null,2);log(j)}catch(e){log("ERROR: "+e.message)}};
-setInterval(async()=>{if(node&&base()){try{await call("/heartbeat",{method:"POST",body:JSON.stringify({node_id:node.node_id})})}catch{}}},30000);
+};$("receive").onclick = async () => {
+  try {
+    if (!node) throw new Error("Register this device first");
+
+    const result = await call(
+      "/receive?node_id=" + encodeURIComponent(node.node_id)
+    );
+
+    $("messages").textContent = JSON.stringify(result.messages, null, 2);
+
+    for (const message of result.messages) {
+      if (!message.delivered_at) {
+        await call("/delivered", {
+          method: "POST",
+          body: JSON.stringify({
+            message_id: message.message_id
+          })
+        });
+      }
+    }
+
+    log(result);
+  } catch (e) {
+    log("ERROR: " + e.message);
+  }
+};setInterval(async()=>{if(node&&base()){try{await call("/heartbeat",{method:"POST",body:JSON.stringify({node_id:node.node_id})})}catch{}}},30000);
 </script>
 </main></body></html>
