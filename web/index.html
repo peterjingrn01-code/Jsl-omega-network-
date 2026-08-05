@@ -40,7 +40,7 @@ label{display:block;margin:9px 0 5px;color:#b7c8da}pre{white-space:pre-wrap;word
 <script>
 const $=id=>document.getElementById(id);
 let node=JSON.parse(localStorage.getItem("omega_node")||"null");
-$("api").value=localStorage.getItem("omega_api")||"";
+$("api").value=localStorage.getItem("omega_api") || window.location.origin;
 $("key").value=localStorage.getItem("omega_key")||"";
 $("name").value=localStorage.getItem("omega_name")||"";
 if(node){$("me").textContent=JSON.stringify(node,null,2);$("status").textContent="Registered: "+node.device_name}
