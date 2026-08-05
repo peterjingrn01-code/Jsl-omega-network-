@@ -48,7 +48,7 @@ export default {
         const deviceName = String(body.device_name || "").trim();
         const deviceType = String(body.device_type || "unknown").trim();
         let nodeId = String(body.node_id || "").trim();
-
+const publicKey = String(body.public_key || "").trim();
         if (!deviceName) return json({ok:false,error:"device_name_required"},400);
         if (!nodeId) nodeId = crypto.randomUUID();
 
