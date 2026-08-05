@@ -58,7 +58,7 @@ const publicKey = String(body.public_key || "").trim();
 
         await env.DB.prepare(`
           INSERT INTO omega_nodes(node_id,device_name,device_type,omega_id,x,y,z,status,created_at,last_seen)
-          VALUES(?,?,?,?,?,?,?,?,?,?)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?)
           ON CONFLICT(node_id) DO UPDATE SET
             device_name=excluded.device_name,
             device_type=excluded.device_type,
