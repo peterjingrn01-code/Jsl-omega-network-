@@ -57,7 +57,7 @@ const publicKey = String(body.public_key || "").trim();
         const t = now();
 
         await env.DB.prepare(`
-          INSERT INTO omega_nodes(node_id,device_name,device_type,omega_id,x,y,z,status,created_at,last_seen)
+          INSERT INTO omega_nodes(node_id,device_name,device_type,omega_id,x,y,z,status,created_at,last_seen,public_key)
           VALUES(?,?,?,?,?,?,?,?,?,?,?)
           ON CONFLICT(node_id) DO UPDATE SET
             device_name=excluded.device_name,
@@ -66,7 +66,7 @@ const publicKey = String(body.public_key || "").trim();
             x=excluded.x,y=excluded.y,z=excluded.z,
             status='ONLINE',
             last_seen=excluded.last_seen, public_key=excluded.public_key
-        `).bind(nodeId,deviceName,deviceType,omegaId,c.x,c.y,c.z,"ONLINE",t,t).run();
+        `).bind(nodeId,deviceName,deviceType,omegaId,c.x,c.y,c.z,"ONLINE",t,t, publicKey).run();
 
         return json({ok:true,node:{node_id:nodeId,device_name:deviceName,device_type:deviceType,omega_id:omegaId,...c,status:"ONLINE",last_seen:t}});
       }
