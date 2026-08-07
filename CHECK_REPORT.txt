@@ -1,0 +1,6 @@
+PASS: worker/worker.js
+PASS: web/app.js
+PASS: web/jofp.js
+PASS: sdk/jofp.js
+PASS: tests/static-check.mjs
+PASS: JOFP complete repository static checks
