@@ -5,9 +5,28 @@ compatibility_date = "2026-08-04"
 [[d1_databases]]
 binding = "DB"
 database_name = "jsl_omega_network"
-database_id = "7b92b057-19aa-4959-87d2-0aa324ee0250"
+database_id = "REPLACE_WITH_YOUR_EXISTING_D1_DATABASE_ID"
 
 [assets]
 directory = "./web"
 binding = "ASSETS"
-run_worker_first = ["/health", "/register", "/heartbeat", "/nodes", "/pair", "/send", "/receive", "/delivered", "/field"]
+run_worker_first = [
+  "/health",
+  "/register",
+  "/heartbeat",
+  "/nodes",
+  "/node",
+  "/pair",
+  "/send",
+  "/receive",
+  "/delivered",
+  "/field",
+  "/coin/init",
+  "/coin/info",
+  "/coin/balance",
+  "/coin/transfer",
+  "/coin/history"
+]
+
+# Existing Cloudflare secret:
+# npx wrangler secret put OMEGA_NETWORK_KEY
