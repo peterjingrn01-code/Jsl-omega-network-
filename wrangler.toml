@@ -5,7 +5,7 @@ compatibility_date = "2026-08-04"
 [[d1_databases]]
 binding = "DB"
 database_name = "jsl_omega_network"
-database_id = "REPLACE_WITH_YOUR_EXISTING_D1_DATABASE_ID"
+database_id = "7b92b057-19aa-4959-87d2-0aa324ee0250"
 
 [assets]
 directory = "./web"
