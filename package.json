@@ -1,12 +1,14 @@
 {
-  "name": "jsl-omega-network",
-  "version": "1.0.0-alpha",
+  "name": "jofp",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "deploy:worker": "wrangler deploy",
-    "dev:worker": "wrangler dev",
-    "db:init": "wrangler d1 execute jsl_omega_network --remote --file=worker/schema.sql"
+    "check": "node --check worker/worker.js && node --check web/app.js && node --check web/jofp.js && node --check sdk/jofp.js && node tests/static-check.mjs",
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "db:fresh": "wrangler d1 execute jsl_omega_network --remote --file=worker/schema.sql",
+    "db:upgrade": "wrangler d1 execute jsl_omega_network --remote --file=worker/upgrade-existing.sql"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
