@@ -3,42 +3,197 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>JOFP — Commercial Block Space Network</title>
+<title>JBS — Jing Block Space</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#07111d;color:#eef5ff;font-family:Arial,Helvetica,sans-serif}
-main{max-width:1150px;margin:auto;padding:22px}
-.top{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
-h1{margin:0;font-size:38px}.muted{color:#9db1c7}.secure{color:#7ce7a2}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
-.card{background:#0d1b2b;border:1px solid #273d55;border-radius:16px;padding:14px}
-input,select,button,textarea{width:100%;padding:11px;border-radius:10px;border:1px solid #36516c;background:#071421;color:#fff;font:inherit}
-button{cursor:pointer;font-weight:700}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
-label{display:block;margin:9px 0 5px;color:#b7c8da}
-pre{white-space:pre-wrap;word-break:break-word;background:#050d16;padding:10px;border-radius:10px;min-height:90px}
-.node{padding:9px;border:1px solid #29445f;border-radius:10px;margin:7px 0;cursor:pointer}
-.note{padding:10px;border-radius:10px;background:#081522;color:#a9bfd4;font-size:13px;margin-top:10px}
-hr{border:0;border-top:1px solid #273d55;margin:18px 0}
-@media(max-width:760px){.grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}h1{font-size:30px}}
+
+:root{
+  --bg:#07111d;
+  --panel:#0d1b2b;
+  --line:#273d55;
+  --text:#eef5ff;
+  --muted:#91a6bc;
+  --green:#7ce7a2;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+main{
+  max-width:920px;
+  margin:auto;
+  padding:24px 18px 50px;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:18px;
+  margin-bottom:26px;
+}
+
+.brand h1{
+  margin:0;
+  font-size:42px;
+  letter-spacing:1px;
+}
+
+.brand-name{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:15px;
+}
+
+.core{
+  margin-top:8px;
+  color:var(--green);
+  font-size:14px;
+}
+
+.lang{
+  color:var(--text);
+  text-decoration:none;
+  border:1px solid var(--line);
+  padding:8px 13px;
+  border-radius:9px;
+}
+
+.status{
+  color:var(--green);
+  margin-bottom:14px;
+  font-size:14px;
+}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+  margin-bottom:14px;
+}
+
+h2{
+  margin:0 0 15px;
+  font-size:20px;
+}
+
+label{
+  display:block;
+  margin:11px 0 6px;
+  color:#b7c8da;
+  font-size:14px;
+}
+
+input,select,textarea,button{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #36516c;
+  background:#071421;
+  color:white;
+  font:inherit;
+}
+
+textarea{
+  resize:vertical;
+}
+
+button{
+  cursor:pointer;
+  font-weight:700;
+}
+
+button:hover{
+  border-color:#6b8cab;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:10px;
+}
+
+.node{
+  padding:11px;
+  border:1px solid #29445f;
+  border-radius:10px;
+  margin:7px 0;
+  cursor:pointer;
+}
+
+pre{
+  white-space:pre-wrap;
+  word-break:break-word;
+  background:#050d16;
+  padding:11px;
+  border-radius:10px;
+  min-height:60px;
+  font-size:13px;
+}
+
+/* Keep protocol configuration available to app.js,
+   but hidden from normal users. */
+.internal{
+  display:none;
+}
+
+.small{
+  color:var(--muted);
+  font-size:13px;
+}
+
+footer{
+  text-align:center;
+  color:#657b91;
+  font-size:12px;
+  margin-top:24px;
+}
+
+@media(max-width:700px){
+  main{padding:18px 12px 40px}
+  .brand h1{font-size:34px}
+  .row{grid-template-columns:1fr}
+}
 </style>
 </head>
+
 <body>
 <main>
-<div class="top">
-  <div>
-    <h1>JOFP</h1>
-    <div class="muted">Commercial Block Space Network Platform · 1.1</div>
-    <div class="secure">Secure-node discovery · E2E encryption · signatures · replay protection · Ω Field</div>
-  </div>
-  <div id="status" class="secure">Not registered</div>
-</div>
 
-<div class="grid">
+<header>
+  <div class="brand">
+    <h1>JBS</h1>
+    <div class="brand-name">Jing Block Space</div>
+    <div class="core">JOFP · Field Ω</div>
+  </div>
+
+  <a class="lang" href="./zh.html">中文</a>
+</header>
+
+<div id="status" class="status">Ready</div>
+
+
+<!-- Internal configuration.
+     IDs are preserved for the existing app.js. -->
+<section class="internal">
+  <input id="api">
+  <input id="key" type="password">
+</section>
+
+
 <section class="card">
-  <h2>Node</h2>
-  <label>JOFP API URL</label><input id="api">
-  <label>Network Key</label><input id="key" type="password" placeholder="OMEGA_NETWORK_KEY">
-  <label>Device Name</label><input id="name" placeholder="Phone / Desktop / Notebook">
+  <h2>My Device</h2>
+
+  <label>Device Name</label>
+  <input id="name" placeholder="Phone / Laptop / Desktop">
+
   <label>Device Type</label>
   <select id="type">
     <option>Android Phone</option>
@@ -48,60 +203,98 @@ hr{border:0;border-top:1px solid #273d55;margin:18px 0}
     <option>Linux</option>
     <option>Other</option>
   </select>
+
   <div class="row">
-    <button id="register">REGISTER / IDENTITY</button>
-    <button id="discover">DISCOVER</button>
+    <button id="register">CONNECT</button>
+    <button id="discover">FIND DEVICES</button>
   </div>
-  <button id="field" style="margin-top:8px">Ω FIELD STATUS</button>
-  <pre id="me">No node identity yet.</pre>
-  <div class="note">Private keys are device-local in IndexedDB. Only public keys are registered. Legacy Alpha nodes are hidden until they re-register with secure identity.</div>
+
+  <button id="field" class="internal">FIELD STATUS</button>
+
+  <pre id="me">Not connected.</pre>
 </section>
+
 
 <section class="card">
-  <h2>Secure Connection</h2>
-  <label>Discovered Secure Nodes</label><div id="nodes"></div>
-  <label>Target Node ID</label><input id="target">
-  <label>Message</label><textarea id="message" rows="4">Hello from JOFP 1.0</textarea>
+  <h2>Devices</h2>
+
+  <div id="nodes">
+    <div class="small">No devices found.</div>
+  </div>
+
+  <!-- Preserved for existing app.js -->
+  <div class="internal">
+    <input id="target">
+  </div>
+
+  <button id="pair">CONNECT DEVICE</button>
+</section>
+
+
+<section class="card">
+  <h2>Message</h2>
+
+  <textarea
+    id="message"
+    rows="4"
+    placeholder="Write a message..."></textarea>
+
   <div class="row">
-    <button id="pair">PAIR</button>
-    <button id="send">ENCRYPT + SIGN + SEND</button>
+    <button id="send">SEND</button>
+    <button id="receive">RECEIVE</button>
   </div>
-  <button id="receive" style="margin-top:8px">RECEIVE + VERIFY + DECRYPT</button>
-  <pre id="messages">No pending messages.</pre>
-</section>
-</div>
 
-<section class="card" style="margin-top:14px">
-  <h2>Second Coin Runtime</h2>
-  <div class="grid">
-    <div>
-      <label>Coin Name</label><input id="coinName" value="JSL Second Coin">
-      <label>Symbol</label><input id="coinSymbol" value="JSL2">
-      <label>Decimals</label><input id="coinDecimals" type="number" value="4" min="0" max="8">
-      <label>Genesis Supply</label><input id="coinSupply" type="number" value="1000000" min="1">
-      <div class="row">
-        <button id="coinInit">CREATE / LOAD COIN</button>
-        <button id="coinInfo">COIN + BALANCE</button>
-      </div>
-    </div>
-    <div>
-      <label>Target Node ID</label><input id="coinTarget">
-      <label>Amount</label><input id="coinAmount" type="number" value="1" min="0">
-      <div class="row">
-        <button id="coinSend">SIGNED TRANSFER</button>
-        <button id="coinHistory">HISTORY</button>
-      </div>
-      <pre id="coinStatus">Coin not loaded yet.</pre>
-    </div>
-  </div>
+  <pre id="messages">No messages.</pre>
 </section>
 
-<section class="card" style="margin-top:14px">
-  <label>Operation Log</label>
+
+<section class="card">
+  <h2>JBS Coin</h2>
+
+  <!-- Existing runtime fields preserved -->
+  <div class="internal">
+    <input id="coinName" value="JSL Second Coin">
+    <input id="coinSymbol" value="JSL2">
+    <input id="coinDecimals" type="number" value="4">
+    <input id="coinSupply" type="number" value="1000000">
+  </div>
+
+  <div class="row">
+    <button id="coinInit">OPEN</button>
+    <button id="coinInfo">BALANCE</button>
+  </div>
+
+  <label>Send To</label>
+  <input id="coinTarget" placeholder="Select or enter recipient">
+
+  <label>Amount</label>
+  <input id="coinAmount" type="number" value="1" min="0">
+
+  <div class="row">
+    <button id="coinSend">TRANSFER</button>
+    <button id="coinHistory">HISTORY</button>
+  </div>
+
+  <pre id="coinStatus">Wallet not opened.</pre>
+</section>
+
+
+<!-- Keep log in DOM for app.js, but don't expose engineering
+     information on the commercial interface. -->
+<section class="internal">
   <pre id="log"></pre>
 </section>
 
+
+<footer>
+  JBS · Jing Block Space
+  <br>
+  JOFP · Field Ω
+</footer>
+
+
 <script type="module" src="./app.js"></script>
+
 </main>
 </body>
 </html>
