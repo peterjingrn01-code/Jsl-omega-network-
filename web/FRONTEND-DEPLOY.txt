@@ -1,0 +1,18 @@
+JBS FRONTEND-ONLY UPDATE
+
+Upload/replace ONLY these files inside GitHub /web:
+- web/index.html
+- web/zh.html
+- web/coin.html
+- web/coin-zh.html
+- web/app.js
+- web/jofp.js
+- web/_headers
+
+Important:
+- worker/worker.js: DO NOT CHANGE
+- wrangler.toml: DO NOT CHANGE
+- D1/schema/core/sdk: DO NOT CHANGE
+
+jofp.js and _headers are copied unchanged from the previously working package.
+app.js is page-aware so the main page and coin pages can share the existing JOFP client safely.

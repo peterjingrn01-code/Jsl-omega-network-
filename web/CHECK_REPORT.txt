@@ -1,0 +1,12 @@
+PASS: app.js syntax
+PASS: jofp.js syntax
+PASS: main-page required DOM IDs
+PASS: Chinese main-page required DOM IDs
+PASS: coin-page required DOM IDs
+PASS: Chinese coin-page required DOM IDs
+PASS: English/Chinese page links
+PASS: main/coin page links
+PASS: jofp.js unchanged from working deployment
+PASS: _headers unchanged from working deployment
+PASS: worker.js not included / not modified
+PASS: wrangler.toml not included / not modified
