@@ -32,3 +32,6 @@ if (!wrangler.includes('binding = "DB"')) throw new Error("Missing DB binding");
 if (!wrangler.includes('binding = "ASSETS"')) throw new Error("Missing ASSETS binding");
 
 console.log("PASS: JOFP complete repository static checks");
+
+if (!worker.includes("legacy_node_requires_reregister")) throw new Error("Missing legacy-node migration guard");
+console.log("PASS: secure-node discovery guard");
