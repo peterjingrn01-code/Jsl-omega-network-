@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>JBS — Jing Block Space</title>
+<title>JBS Coin</title>
 <style>
 *{box-sizing:border-box}
 :root{
@@ -128,63 +128,50 @@ footer a:hover{color:var(--text)}
 }
 </style>
 </head>
-<body data-page="main">
+<body data-page="coin">
 <main>
 <header>
   <div>
-    <h1>JBS</h1>
-    <div class="brand-line">Jing Block Space</div>
+    <h1>JBS Coin</h1>
     <div class="core">JOFP · Field Ω</div>
   </div>
   <nav class="nav">
-    <a href="./zh.html">中文</a>
+    <a href="./index.html">JBS</a>
+    <a href="./coin-zh.html">中文</a>
   </nav>
 </header>
 
 <div id="status" class="status">Ready</div>
 
 <section class="card">
-  <h2>My Device</h2>
-  <label for="name">Device Name</label>
-  <input id="name" placeholder="Phone / Laptop / Desktop">
-  <label for="type">Device Type</label>
-  <select id="type">
-    <option>Android Phone</option>
-    <option>Windows Desktop</option>
-    <option>Windows Notebook</option>
-    <option>Mac</option>
-    <option>Linux</option>
-    <option>Other</option>
-  </select>
+  <h2>Wallet</h2>
   <div class="row">
-    <button id="register">CONNECT</button>
-    <button id="discover">FIND DEVICES</button>
+    <button id="coinInfo">BALANCE</button>
+    <button id="coinHistory">HISTORY</button>
   </div>
-  <div id="me">Not connected</div>
+  <div id="coinBox">Wallet not opened.</div>
 </section>
 
 <section class="card">
-  <h2>Devices</h2>
-  <div id="nodes"><div class="empty">No devices found.</div></div>
-  <input id="target" class="internal" aria-hidden="true">
-  <button id="pair">CONNECT DEVICE</button>
+  <h2>Transfer</h2>
+  <label for="coinTarget">Recipient</label>
+  <input id="coinTarget" placeholder="Node ID">
+  <label for="coinAmount">Amount</label>
+  <input id="coinAmount" type="number" value="1" min="0">
+  <button id="coinSend" style="margin-top:10px">TRANSFER</button>
 </section>
 
 <section class="card">
-  <h2>Message</h2>
-  <textarea id="message" rows="4" placeholder="Write a message..."></textarea>
-  <div class="row">
-    <button id="send">SEND</button>
-    <button id="receive">RECEIVE</button>
-  </div>
-  <div id="messages">No messages.</div>
-</section>
-
-<section class="card">
-  <a class="coin-link" href="./coin.html">
-    <span>JBS Coin</span>
-    <span>→</span>
-  </a>
+  <h2>Initialize</h2>
+  <label for="coinName">Coin Name</label>
+  <input id="coinName" value="JSL Second Coin">
+  <label for="coinSymbol">Symbol</label>
+  <input id="coinSymbol" value="JSL2">
+  <label for="coinDecimals">Decimals</label>
+  <input id="coinDecimals" type="number" value="4" min="0" max="8">
+  <label for="coinSupply">Genesis Supply</label>
+  <input id="coinSupply" type="number" value="1000000" min="1">
+  <button id="coinInit" style="margin-top:10px">CREATE / LOAD</button>
 </section>
 
 <input id="api" type="hidden">
