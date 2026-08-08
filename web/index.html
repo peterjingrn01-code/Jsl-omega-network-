@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>JOFP — Block Space Network</title>
+<title>JOFP — Commercial Block Space Network</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#07111d;color:#eef5ff;font-family:Arial,Helvetica,sans-serif}
@@ -27,8 +27,8 @@ hr{border:0;border-top:1px solid #273d55;margin:18px 0}
 <div class="top">
   <div>
     <h1>JOFP</h1>
-    <div class="muted">Block Space Network Connection Protocol · 1.0</div>
-    <div class="secure">Secure identity · E2E encryption · replay protection · Ω Field</div>
+    <div class="muted">Commercial Block Space Network Platform · 1.1</div>
+    <div class="secure">Secure-node discovery · E2E encryption · signatures · replay protection · Ω Field</div>
   </div>
   <div id="status" class="secure">Not registered</div>
 </div>
@@ -54,12 +54,12 @@ hr{border:0;border-top:1px solid #273d55;margin:18px 0}
   </div>
   <button id="field" style="margin-top:8px">Ω FIELD STATUS</button>
   <pre id="me">No node identity yet.</pre>
-  <div class="note">Private keys are device-local in IndexedDB. Only public keys are registered.</div>
+  <div class="note">Private keys are device-local in IndexedDB. Only public keys are registered. Legacy Alpha nodes are hidden until they re-register with secure identity.</div>
 </section>
 
 <section class="card">
   <h2>Secure Connection</h2>
-  <label>Discovered Nodes</label><div id="nodes"></div>
+  <label>Discovered Secure Nodes</label><div id="nodes"></div>
   <label>Target Node ID</label><input id="target">
   <label>Message</label><textarea id="message" rows="4">Hello from JOFP 1.0</textarea>
   <div class="row">

@@ -45,7 +45,7 @@ function renderNodes() {
     const d = document.createElement("div");
     d.className = "node";
     d.innerHTML =
-      `<b>${esc(n.device_name)}</b><br>` +
+      `<b>${esc(n.device_name)}</b> <span style="color:#78e3a0">✓ secure</span><br>` +
       `<span class="muted">${esc(n.device_type)}</span><br>` +
       `<small>${esc(n.node_id)}</small>`;
     d.onclick = () => {
@@ -74,7 +74,7 @@ $("discover").onclick = async () => {
     syncClient();
     discovered = await client.discover();
     renderNodes();
-    log({ ok: true, nodes: discovered });
+    log({ ok: true, secure_nodes: discovered });
   } catch (e) { log("ERROR: " + e.message); }
 };
 

@@ -236,7 +236,7 @@ export class JOFP {
 
     const identity = await this.ensureIdentity();
     const target = await this.resolve(targetNodeId);
-    if (!target.public_key?.ecdh) throw new Error("target_identity_missing");
+    if (!target.public_key?.ecdh) throw new Error("target_requires_secure_reregister");
 
     const aes = await deriveAES(identity.ecdhPrivate, target.public_key.ecdh);
     const iv = crypto.getRandomValues(new Uint8Array(12));
