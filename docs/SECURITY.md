@@ -1,20 +1,5 @@
-# JOFP Security Model
+# JOFP 1.1 Security
 
-Implemented:
-- ECDSA P-256 / SHA-256 signatures
-- ECDH P-256 shared-key derivation
-- AES-GCM-256 end-to-end payload encryption
-- non-exportable private CryptoKeys stored in IndexedDB
-- server-side signature verification before message acceptance
-- receiver-side signature verification before decryption
-- unique replay nonce enforcement
-- message timestamp and expiry validation
-- delivery target checking
-- payload size limit
-- simple per-node server rate limiting
-- CSP and security response headers for static assets
+Implemented: ECDSA P-256 signatures, ECDH P-256 key agreement, AES-GCM-256 E2E encryption, device-local IndexedDB private keys, signed message envelopes, replay nonce rejection, message expiry, payload limits, rate limiting, secure-node-only discovery, delivery acknowledgement, CSP/security headers.
 
-Operational limits:
-- OMEGA_NETWORK_KEY is still a shared test/deployment gate.
-- Browser identity recovery/rotation is not automated.
-- D1 coin transfers are suitable for controlled validation; high-value financial deployment would require additional economic, legal, concurrency and incident-response design.
+Legacy nodes without signing/ECDH public identity are hidden from normal discovery and must re-register once after upgrading.

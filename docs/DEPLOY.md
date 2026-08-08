@@ -1,19 +1,10 @@
-# Deployment Checklist
+# JOFP 1.1 Full Deployment
 
-Existing infrastructure:
-- Cloudflare project: jsl-omega-network
-- D1 binding: DB
-- D1 database: jsl_omega_network
-- Assets binding: ASSETS
-- Suggested hostname: jofp.jsl-ian.com
-
-Upgrade:
-1. Execute `worker/upgrade-existing.sql` once in D1 Console.
-2. Preserve the current D1 UUID in wrangler.toml.
-3. Commit the complete repository.
-4. Confirm Cloudflare build says Worker + Assets + DB.
-5. `/health` must return protocol JOFP/1.0.
-6. Re-register each device once to create secure local identity.
-7. Discover, send encrypted message, receive verified plaintext.
-8. Initialize the second coin once.
-9. Transfer from creator node to another node.
+1. Replace the existing GitHub repository contents with this entire package.
+2. Do not run more D1 migrations for 1.1; the required replay/rate/coin tables were already created during the prior upgrade.
+3. Preserve the existing Cloudflare `OMEGA_NETWORK_KEY` secret.
+4. Confirm Cloudflare build is green.
+5. Open the deployed site on every active device and press REGISTER / IDENTITY once.
+6. DISCOVER now shows only nodes with JOFP secure identity.
+7. Test Pair, encrypted Send, Receive/Verify/Decrypt.
+8. Then initialize/test the optional Second Coin runtime if wanted.
