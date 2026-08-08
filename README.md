@@ -1,44 +1,26 @@
-# JOFP 1.0 — Complete Deployable Platform
+# JOFP Commercial Block Space Platform 1.1
 
-JOFP is the JSL Omega Field Protocol for Block Space Network connections.
+Complete deployable JOFP platform package for the existing Cloudflare project.
 
-This package contains the full deployable platform:
-- Pure JSL JOFP protocol definition
-- Cloudflare Worker API
-- D1 field persistence
-- Secure device identity
-- ECDSA P-256 signatures
-- ECDH P-256 key agreement
-- AES-GCM-256 end-to-end encrypted messages
-- message expiry + replay protection
-- delivery acknowledgement
-- rate limiting
-- static web client
-- reusable JOFP browser SDK
-- Second Coin runtime using signed JOFP node transactions
+## Main fix from 1.0
+The prior test exposed legacy Alpha nodes without secure public identity. JOFP 1.1 now filters discovery to secure nodes only. A device upgrades by opening the platform and pressing REGISTER / IDENTITY once. This prevents normal users from selecting an incompatible legacy target and getting `target_identity_missing`.
 
-## Important deployment note
-
-Your existing D1 database already contains Alpha/Beta data.
-Run `worker/upgrade-existing.sql` once before deploying this release.
-
-Replace only the placeholder D1 UUID in `wrangler.toml` with the UUID already used by your current project. This is configuration, not source-code modification.
-
-Your existing `OMEGA_NETWORK_KEY` Cloudflare secret remains in Cloudflare and is not stored in this repository.
+## Included
+- Cloudflare Worker + D1 + Assets
+- Secure device identity (ECDSA P-256 + ECDH P-256)
+- AES-GCM-256 end-to-end encrypted messaging
+- Signed envelopes and replay protection
+- Secure-node discovery and pairing
+- Delivery acknowledgement
+- Field status dashboard
+- Reusable browser SDK
+- Optional Second Coin runtime
+- Existing D1 database ID already configured
 
 ## Deploy
+Replace the entire contents of the existing `jsl-omega-network` GitHub repository with this package and commit. Cloudflare Git deployment should deploy automatically. The D1 upgrade tables from the previous package are already present, so no additional SQL is required for this 1.1 package.
 
-1. Run `worker/upgrade-existing.sql` in the existing D1 Console.
-2. Put the existing D1 UUID into `wrangler.toml`.
-3. Replace the GitHub repository contents with this package and commit.
-4. Cloudflare Git deployment deploys it automatically.
-5. Open JOFP on each test device and press REGISTER / IDENTITY once.
-6. Test secure messaging.
-7. In Second Coin Runtime, choose the coin name/symbol/supply and initialize it once.
-8. Transfer coin between registered JOFP nodes.
+After deployment, open the new site on every active device and press REGISTER / IDENTITY once. Then DISCOVER SECURE NODES -> PAIR -> ENCRYPT + SIGN + SEND -> RECEIVE + VERIFY + DECRYPT.
 
-## Validation status
-
-The JavaScript files and repository structure were checked before packaging.
-This release is intended for controlled real-network validation and iterative improvement.
-Do not treat an experimental coin balance as legal tender or promise financial returns.
+## Commercial operation
+This package is an operational production candidate, not a promise of zero vulnerabilities. For public commercial service, also configure support, terms/privacy, backups, monitoring/alerts, incident response, billing, and any jurisdiction-specific compliance that applies to your business.
