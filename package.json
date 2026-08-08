@@ -1,6 +1,6 @@
 {
-  "name": "jofp",
-  "version": "1.0.0",
+  "name": "jofp-commercial-blockspace-platform",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "scripts": {
